@@ -1,0 +1,24 @@
+{% extends 'unilang/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+  <h3>{{ language }}</h3>
+{% endblock page_header %}
+
+{% block content %}
+
+  <h6><a href="{% url 'unilang:new_word' language.id %}">Add a new word</a>  -
+  <a href="{% url 'unilang:delete_words' language.id %}">Delete word(s)</a>  -
+  <a href="{% url 'unilang:test' language.id %}">Test your knowledge</a></h6>
+
+  <ul>
+    {% for word in words %}
+      <li>
+        <h5>{{ word.word }} - {{ word.translation }}</h5>
+      </li>
+    {% empty %}
+      <li><h4>There are no words for this language yet.</h4></li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}

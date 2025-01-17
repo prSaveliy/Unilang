@@ -1,0 +1,21 @@
+{% extends 'unilang/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+
+  <div class="jumbotron">
+    <h1 class="display-3">Welcome to Unilang.</h1>
+
+    <p class="lead">Unilang helps you keep track of your language learning, for any language you're learning about.
+    </p>
+
+    {% if not user.is_authenticated %}
+      <a class="btn btn-lg btn-secondary" href="{% url 'users:register' %}">
+        Register &raquo;
+      </a>
+    {% endif %}
+  </div>
+
+{% endblock page_header %}
+
+

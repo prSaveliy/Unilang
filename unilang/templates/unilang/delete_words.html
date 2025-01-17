@@ -1,0 +1,28 @@
+{% extends 'unilang/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+  <h3>Delete word(s) for <a href="{% url 'unilang:language' language.id %}">{{ language }}</a></h3>
+{% endblock page_header %}
+
+{% block content %}
+
+  {% if words %}
+    <form method="post" action="{% url 'unilang:delete_words' language.id %}" class="form">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+
+      {% buttons %}
+        <button name="submit" onclick="return confirm('Are you sure you want to delete selected word(s)?')" class="btn btn-secondary">
+          Delete
+        </button>
+      {% endbuttons %}
+    </form>
+  {% else %}
+    <h4>There are no words to delete.</h4>
+    <ul>
+      <li><h6><a href="{% url 'unilang:language' language.id %}">Back to {{ language }}</a></h6></li>
+    </ul>
+  {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'unilang/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+  <h3>Test your knowledge!</h3>
+{% endblock page_header %}
+
+{% block content %}
+
+  {% if current_word %}
+    <h5>{{ current_word }}</h5>
+    {% if request.GET.show_translation %}
+      <h5>{{ current_word.translation }}</h5>
+    {% else %}
+      <h6><a href="?show_translation=true">Show translation</a></h6>
+    {% endif %}
+  {% else %}
+    <h4>Add a word to be able to test yourself!</h4>
+  {% endif %}
+
+  {% if next_word %}
+    <p><h6><a href="{% url 'unilang:test_word' language.id next_word.id %}">Next word</a></h6></p>
+  {% else %}
+    <p><h6><a href="{% url 'unilang:language' language.id %}">Back to {{ language }}</a></h6></p>
+  {% endif %}
+
+{% endblock content %}
