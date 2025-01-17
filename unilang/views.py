@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import modelform_factory
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
@@ -20,7 +20,7 @@ def languages(request):
 
 @login_required
 def language(request, language_id):
-    language = Language.objects.get(id=language_id)
+    language = get_object_or_404(Language, id=language_id)
     if language.owner != request.user:
         raise Http404
 
@@ -47,7 +47,7 @@ def new_language(request):
 
 @login_required
 def new_word(request, language_id):
-    language = Language.objects.get(id=language_id)
+    language = get_object_or_404(Language, id=language_id)
     if language.owner != request.user:
         raise Http404
 
@@ -86,7 +86,7 @@ def delete_languages(request):
 
 @login_required
 def delete_words(request, language_id):
-    language = Language.objects.get(id=language_id)
+    language = get_object_or_404(Language, id=language_id)
     if language.owner != request.user:
         raise Http404
 
@@ -107,7 +107,7 @@ def delete_words(request, language_id):
 
 @login_required
 def test(request, language_id, word_id=None):
-    language = Language.objects.get(id=language_id)
+    language = get_object_or_404(Language, id=language_id)
     if language.owner != request.user:
         raise Http404
 
