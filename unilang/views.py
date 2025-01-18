@@ -107,7 +107,7 @@ def delete_words(request, language_id):
 
 @login_required
 def test(request, language_id, word_id=None):
-    language = Language.objects.get(id=language_id)
+    language = get_object_or_404(Language, id=language_id)
     if language.owner != request.user:
         raise Http404
 
@@ -118,10 +118,9 @@ def test(request, language_id, word_id=None):
     else:
         current_word = words.first()
 
-    next_word = words.filter(id__gt=current_word.id).first()
-
-    if current_word is None:
-        return render(request, "unilang/test.html", {"current_word": None})
+    next_word = None
+    if current_word:
+        next_word = words.filter(id__gt=current_word.id).first()
 
     if not words.exists():
         context = {'current_word': None, 'next_word': None, 'language': language}
