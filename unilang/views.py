@@ -107,7 +107,7 @@ def delete_words(request, language_id):
 
 @login_required
 def test(request, language_id, word_id=None):
-    language = get_object_or_404(Language, id=language_id)
+    language = Language.objects.get(id=language_id)
     if language.owner != request.user:
         raise Http404
 
