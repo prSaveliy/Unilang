@@ -120,6 +120,9 @@ def test(request, language_id, word_id=None):
 
     next_word = words.filter(id__gt=current_word.id).first()
 
+    if current_word is None:
+        return render(request, "unilang/test.html", {"current_word": None})
+
     if not words.exists():
         context = {'current_word': None, 'next_word': None, 'language': language}
         return render(request, 'unilang/test.html', context)
