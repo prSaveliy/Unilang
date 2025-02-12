@@ -24,6 +24,11 @@ class LanguageDeletionForm(forms.Form):
         label=""
     )
 
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['languages'].queryset = Language.objects.filter(owner=user)
+
 
 class WordsDeletionForm(forms.Form):
     words = forms.ModelMultipleChoiceField(

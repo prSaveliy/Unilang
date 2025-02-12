@@ -69,12 +69,12 @@ def new_word(request, language_id):
 
 @login_required
 def delete_languages(request):
-    languages = Language.objects.all()
+    languages = Language.objects.filter(owner=request.user)
 
     if request.method != 'POST':
-        form = LanguageDeletionForm()
+        form = LanguageDeletionForm(user=request.user)
     else:
-        form = LanguageDeletionForm(data=request.POST)
+        form = LanguageDeletionForm(data=request.POST, user=request.user)
         if form.is_valid():
             selected_languages = form.cleaned_data['languages']
             selected_languages.delete()
