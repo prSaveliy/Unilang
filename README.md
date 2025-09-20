@@ -1,3 +1,6 @@
+![Django](https://img.shields.io/badge/Django-5.0-green?logo=django)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-4-purple?logo=bootstrap)
+
 # Unilang
 
 Unilang is a web application for learning and managing foreign languages.  
